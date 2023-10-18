@@ -1,7 +1,7 @@
 schema: '2.0'
  stages:
    tokenize_text:
-     cmd: python scripts/data_scripts/tokenize_text.py data/raw/train_raw.csv
+     cmd: python3 scripts/data_scripts/tokenize_text.py data/raw/train_raw.csv
      deps:
      - path: data/raw/train_raw.csv
        hash: md5
@@ -18,7 +18,7 @@ schema: '2.0'
        size: 98672597
        nfiles: 1
    remove_stopwords:
-     cmd: python scripts/data_scripts/remove_stopwords.py data/stage1/train.pkl
+     cmd: python3 scripts/data_scripts/remove_stopwords.py data/stage1/train.pkl
      deps:
      - path: data/stage1/train.pkl
        hash: md5
@@ -35,7 +35,7 @@ schema: '2.0'
        size: 135360845
        nfiles: 1
    split:
-     cmd: python scripts/data_scripts/train_test_split.py data/stage2/train.pkl
+     cmd: python3 scripts/data_scripts/train_test_split.py data/stage2/train.pkl
      deps:
      - path: data/stage2/train.pkl
        hash: md5
@@ -59,7 +59,7 @@ schema: '2.0'
        md5: e362a898d70416e4bf19d831c66b5bb4
        size: 156950862
    train:
-     cmd: python scripts/model_scripts/train.py data/stage3/train.csv models/svm.pkl
+     cmd: python3 scripts/model_scripts/train.py data/stage3/train.csv models/svm.pkl
        tokenizer/tokenizer.pkl
      deps:
      - path: data/stage3/train.csv
@@ -85,7 +85,7 @@ schema: '2.0'
        md5: be789e1d1bf90b5224d89197116d18ed
        size: 11581575
    evaluate:
-     cmd: python scripts/model_scripts/evaluate.py data/stage3/test.csv models/svm.pkl
+     cmd: python3 scripts/model_scripts/evaluate.py data/stage3/test.csv models/svm.pkl
        tokenizer/tokenizer.pkl
      deps:
      - path: data/stage3/test.csv
@@ -110,7 +110,7 @@ schema: '2.0'
        md5: f44f8c8a3862edd3388ed8b37651c90b
        size: 29
    get_data:
-     cmd: python scripts/data_scripts/get_data.py
+     cmd: python3 scripts/data_scripts/get_data.py
      deps:
      - path: scripts/data_scripts/tokenize_text.py
        hash: md5
